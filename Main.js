@@ -43,8 +43,8 @@ class BlockChain {
     for (let i = 1; i < this.chain.length; i++) {
       const currBlock = this.chain[i];
       const prevBlock = this.chain[i - 1];
-     
-      if (currBlock.hash !== currBlock.calculateHash()) {
+
+      if (currBlock.hash.toString() !== currBlock.calculateHash().toString()) {
         return "Current Hash dosen't Match ";
       }
 
@@ -61,4 +61,10 @@ myCoin.addBlock(new Block(1, "18/12/2020", { amount: 2 }));
 myCoin.addBlock(new Block(2, "19/12/2020", { amount: 4 }));
 
 console.log("Is Block Chain Valid? " + myCoin.isChainValid());
-//console.log(JSON.stringify(myCoin, null, 4));
+console.log(JSON.stringify(myCoin, null, 4));
+
+myCoin.chain[1].data = { amount: 200 };
+myCoin.chain[1].hash = myCoin.chain[1].calculateHash();
+
+console.log("Is Block Chain Valid? " + myCoin.isChainValid());
+console.log(JSON.stringify(myCoin, null, 4));
